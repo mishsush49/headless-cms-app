@@ -1,0 +1,4 @@
+/.idea/
+/node_modules/
+content-home/node_modules/
+.env
