@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import ContentGeneration from './ContentGeneration';
+import ShowAllContent from './ShowAllContent';
+import './App.css';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [activeTab, setActiveTab] = useState('');
 
-  useEffect(() => {
-    axios.get('http://localhost:9000/contentful')
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-        setData([]);
-      });
-  }, []);
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className="App">
-      <h1>Contentful Data</h1>
-      <div>
-        {data.map((item, index) => (
-          <div key={index} style={{ marginBottom: '20px' }}>
-            <h2>{item.fields.title}</h2> {/* Assuming each item has a title */}
-            <p>{item.fields.description}</p> {/* Assuming each item has a description */}
-            {/* Display an image if it exists */}
-            {item.fields.image && (
-              <img src={item.fields.image.fields.file.url} alt={item.fields.title} style={{ maxWidth: '100%' }} />
-            )}
-            {/* You can add more fields here */}
-          </div>
-        ))}
+      <header className="App-header">
+        <h1>Content Management App</h1>
+      </header>
+      <div className="tabs">
+        <button
+          className={activeTab === 'contentGeneration' ? 'active' : ''}
+          onClick={() => handleTabClick('contentGeneration')}
+        >
+          Content Generation
+        </button>
+        <button
+          className={activeTab === 'showAllContent' ? 'active' : ''}
+          onClick={() => handleTabClick('showAllContent')}
+        >
+          Show All Contents
+        </button>
       </div>
+      {activeTab === 'contentGeneration' && <ContentGeneration />}
+      {activeTab === 'showAllContent' && <ShowAllContent />}
     </div>
   );
 }
