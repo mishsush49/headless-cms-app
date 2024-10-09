@@ -31,6 +31,7 @@ function ShowAllContent() {
               <tr style={{ backgroundColor: '#f2f2f2' }}>
                 <th style={tableCellStyle}>Player Name</th>
                 <th style={tableCellStyle}>Description</th>
+                <th style={tableCellStyle}>Role</th>
               </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@ function ShowAllContent() {
                 <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' }}>
                   <td style={tableCellStyle}>{item.fields.playerName}</td>
                   <td style={tableCellStyle}>{item.fields.description}</td>
+                  <td style={tableCellStyle}>{item.fields.role}</td>
                 </tr>
               ))}
             </tbody>

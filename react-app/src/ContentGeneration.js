@@ -95,7 +95,7 @@ function ContentGeneration() {
               </tr>
               <tr>
                 <td><label>Country:</label></td>
-                <td><input type="text" value={generatedContent.Country} onChange={(e) => handleContentChange(e, 'Country')} /></td>
+                <td><input type="text" value={generatedContent.Role} onChange={(e) => handleContentChange(e, 'Country')} /></td>
               </tr>
             </tbody>
           </table>

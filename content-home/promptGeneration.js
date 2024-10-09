@@ -34,7 +34,7 @@ app.post('/generate-content', async (req, res) => {
 
 //  const { prompt, systemMessage } = req.body;
 
-  const prompt = `{ "prompt": "Please share information about ${playerName} in following format: 1. Player Name 2. description(what his role is ), 3. which country is he from". This generated response should not have anything else than PlayerName, Description and Country. It should not be Player name, just PlayerName}`;
+  const prompt = `{ "prompt": "Please share information about ${playerName} in following format: 1. Player Name 2. description i.e what is his background, some 2 lines about that player , 3. What is his role in team, which should not be more than 5 words". This generated response should not have anything else than PlayerName, Description and Role. It should not be Player name, just PlayerName}`;
 
   //console.log(prompt);
 
@@ -67,9 +67,10 @@ app.post('/publish-content', async (req, res) => {
       return res.status(400).json({ error: 'Content is required' });
     }
     //console.log('Received content:', content);
-    const { PlayerName, Description } = content;
-    console.log('PlayerName content:', PlayerName);
-    console.log('Description content:', Description);
+    const { PlayerName, Description, Role } = content;
+    console.log('PlayerName ::', PlayerName);
+    console.log('Description ::', Description);
+    console.log('Role ::', Role);
     // Get the space
     const space = await contentFulClient.getSpace(SPACE_ID);
 
@@ -85,6 +86,9 @@ app.post('/publish-content', async (req, res) => {
         },
         description: {
           'en-US': `${Description}`,
+        },
+        role: {
+          'en-US': `${Role}`,
         },
       },
     });
